@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rohith Reddy Narra</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Rohith Reddy Narra: Senior Data Engineer building petabyte-scale data platforms and agentic AI systems.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a dark, photo-led hero, then the career read as a data pipeline: each role is a stage, with event-time stamps in mono. */
+:root {
+  --bg: #0d1117;        /* ink graphite, matches the headshot backdrop */
+  --surface: #151b24;
+  --line: #263041;
+  --fg: #e7ecf3;
+  --muted: #94a0b2;
+  --accent: #9cc5f2;    /* oxford-shirt blue from the photo */
+  --accent-ink: #0d1117;
+  --todo: #f0c36b;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #f5f7fa; --surface: #ffffff; --line: #dbe1ea; --fg: #121823; --muted: #5a6577;
+    --accent: #1f5aa6; --accent-ink: #ffffff; --todo: #9a6a00; color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #f5f7fa; --surface: #ffffff; --line: #dbe1ea; --fg: #121823; --muted: #5a6577;
+  --accent: #1f5aa6; --accent-ink: #ffffff; --todo: #9a6a00; color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }
+body {
+  background: var(--bg); color: var(--fg);
+  font: 400 1.0625rem/1.65 var(--body);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+.wrap {
+  max-width: 1080px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; }
+p { margin: 0; }
+.mono { font-family: var(--mono); font-size: .8125rem; letter-spacing: .02em; }
+.label { font-family: var(--mono); font-size: .75rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+
+/* nav */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+nav.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(10px); border-bottom: 1px solid var(--line);
+}
+nav.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; }
+nav.top .mark { font-family: var(--display); font-weight: 800; font-size: 1.1rem; color: var(--fg); text-decoration: none; }
+nav.top ul { display: flex; gap: 20px; list-style: none; margin: 0; padding: 0; flex-wrap: wrap; }
+nav.top ul a { color: var(--muted); text-decoration: none; font-size: .9rem; }
+nav.top ul a:hover { color: var(--fg); }
+@media (max-width: 760px) { nav.top ul { display: none; } }
+
+/* hero */
+.hero .wrap { display: grid; grid-template-columns: 232px 1fr; gap: 48px; align-items: center; padding-block: 72px 56px; }
+.hero h1 { font-size: clamp(2.6rem, 6.4vw, 4.8rem); font-weight: 800; line-height: .98; letter-spacing: -.02em; }
+.hero h1 span { color: var(--muted); font-weight: 400; }
+.hero .role { margin-top: 20px; font-size: 1.25rem; color: var(--fg); max-width: 34ch; }
+.hero .role em { font-style: normal; color: var(--accent); }
+.hero .meta { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 8px 20px; color: var(--muted); }
+.links { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px;
+  border: 1px solid var(--line); color: var(--fg); text-decoration: none; font-size: .95rem; background: var(--surface);
+  transition: border-color .2s, transform .2s;
+}
+.btn:hover { border-color: var(--accent); transform: translateY(-1px); }
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; }
+.btn svg { width: 16px; height: 16px; fill: currentColor; flex: none; }
+.portrait { margin: 0; display: grid; gap: 14px; justify-items: center; align-self: start; }
+.portrait .ring { padding: 6px; border-radius: 50%; border: 1px solid var(--line); background: conic-gradient(from 200deg, var(--accent), transparent 35%, transparent 65%, var(--accent)); }
+.portrait img { display: block; width: 220px; height: auto; max-width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 50%; border: 4px solid var(--bg); }
+.portrait figcaption { text-align: center; }
+.portrait figcaption b { display: block; font-family: var(--display); font-weight: 600; font-size: 1rem; margin-top: 2px; }
+@media (max-width: 760px) {
+  .hero .wrap { grid-template-columns: 1fr; gap: 28px; padding-block: 40px; }
+  .portrait { justify-items: start; grid-template-columns: auto 1fr; align-items: center; }
+  .portrait img { width: 128px; height: auto; }
+  .portrait figcaption { text-align: left; }
+}
+
+/* stats */
+.stats { border-block: 1px solid var(--line); }
+.stats .wrap { display: grid; grid-template-columns: repeat(3, 1fr); }
+.stat { padding: 26px 20px 26px 0; display: grid; gap: 4px; }
+.stat + .stat { padding-left: 20px; border-left: 1px solid var(--line); }
+.stat b { font-family: var(--display); font-size: 2.1rem; font-weight: 600; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.stat span { color: var(--muted); font-size: .9rem; }
+@media (max-width: 720px) {
+  .stat { padding-right: 10px; }
+  .stat + .stat { padding-left: 10px; }
+  .stat b { font-size: 1.6rem; }
+  .stat span { font-size: .8rem; }
+}
+
+/* sections */
+section.block { padding-block: 88px 0; }
+.head { display: grid; grid-template-columns: 220px 1fr; gap: 32px; margin-bottom: 36px; align-items: baseline; }
+.head h2 { font-size: clamp(1.8rem, 3.6vw, 2.5rem); font-weight: 600; letter-spacing: -.01em; }
+@media (max-width: 760px) { .head { grid-template-columns: 1fr; gap: 6px; } section.block { padding-block: 64px 0; } }
+.indent { margin-left: 252px; }
+@media (max-width: 760px) { .indent { margin-left: 0; } }
+.about p { max-width: 64ch; color: var(--fg); }
+.about p + p { margin-top: 16px; }
+.about .lede { font-size: 1.3rem; line-height: 1.5; font-family: var(--display); font-weight: 400; }
+
+.todo {
+  display: inline-block; font-family: var(--mono); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--todo); border: 1px dashed var(--todo); border-radius: 4px; padding: 1px 6px; vertical-align: middle;
+}
+.todo-card { border: 1px dashed var(--todo) !important; }
+
+/* journey pipeline */
+.pipeline { position: relative; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0; margin-bottom: 48px; }
+.pipeline::before { content: ""; position: absolute; left: 6px; right: 6px; top: 6px; height: 2px; background: linear-gradient(90deg, var(--line), var(--accent)); }
+.node { position: relative; padding-top: 26px; padding-right: 12px; min-width: 0; }
+.node::before { content: ""; position: absolute; top: 0; left: 0; width: 14px; height: 14px; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent); }
+.node.now::before { background: var(--accent); box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 22%, transparent); }
+.node b { display: block; font-family: var(--display); font-weight: 600; font-size: 1.05rem; line-height: 1.25; margin-top: 4px; }
+.node span { color: var(--muted); font-size: .88rem; }
+@media (max-width: 760px) {
+  .pipeline { grid-template-columns: 1fr; gap: 22px; padding-left: 28px; }
+  .pipeline::before { left: 6px; right: auto; top: 6px; bottom: 6px; width: 2px; height: auto; background: linear-gradient(180deg, var(--line), var(--accent)); }
+  .node { padding-top: 0; }
+  .node::before { left: -28px; top: 4px; }
+}
+
+/* experience */
+.role-card { display: grid; grid-template-columns: 220px 1fr; gap: 32px; padding-block: 36px; border-top: 1px solid var(--line); }
+.role-card:first-of-type { border-top: 0; padding-top: 0; }
+.role-card aside { display: grid; gap: 6px; align-content: start; }
+.role-card aside .co { font-family: var(--display); font-size: 1.4rem; font-weight: 600; }
+.role-card h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 14px; }
+.role-card ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; max-width: 70ch; }
+.role-card li { position: relative; padding-left: 20px; color: var(--fg); }
+.role-card li::before { content: "›"; position: absolute; left: 2px; color: var(--accent); font-weight: 600; }
+.role-card li strong { color: var(--accent); font-weight: 500; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
+.chip { font-family: var(--mono); font-size: .75rem; padding: 3px 9px; border-radius: 4px; background: var(--surface); border: 1px solid var(--line); color: var(--muted); }
+details.more { margin-top: 12px; }
+details.more summary { cursor: pointer; color: var(--accent); font-size: .92rem; }
+details.more ul { margin-top: 12px; }
+@media (max-width: 760px) { .role-card { grid-template-columns: 1fr; gap: 12px; } }
+
+.story { max-width: 66ch; display: grid; gap: 14px; }
+.story p { color: var(--fg); }
+.role-card .title { color: var(--muted); font-family: var(--mono); font-size: .8rem; letter-spacing: .04em; margin: -8px 0 16px; }
+.hl { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 18px; padding-top: 14px; border-top: 1px dashed var(--line); }
+.hl span { font-family: var(--mono); font-size: .8rem; color: var(--muted); }
+.hl b { color: var(--accent); font-weight: 500; }
+.chapter { color: var(--accent); }
+.recog { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 760px) { .recog { grid-template-columns: 1fr; } }
+.recog ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.recog li { color: var(--fg); font-size: .96rem; }
+
+/* cards grid */
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 22px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.card h3 { font-size: 1.15rem; font-weight: 600; line-height: 1.3; }
+.card p { color: var(--muted); font-size: .96rem; }
+.card .foot { margin-top: auto; padding-top: 8px; display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* patent */
+.patent { display: grid; grid-template-columns: 180px 1fr; gap: 32px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 32px; }
+.patent .num { font-family: var(--mono); font-size: 1rem; color: var(--accent); word-break: break-all; }
+.patent h3 { font-size: 1.45rem; font-weight: 600; margin-bottom: 10px; }
+.patent p { color: var(--muted); max-width: 62ch; }
+@media (max-width: 680px) { .patent { grid-template-columns: 1fr; gap: 12px; padding: 22px; } }
+
+/* writing list */
+.writing { display: grid; border-top: 1px solid var(--line); }
+.post { display: grid; grid-template-columns: 120px 1fr auto; gap: 20px; padding-block: 20px; border-bottom: 1px solid var(--line); align-items: baseline; color: inherit; text-decoration: none; }
+.post h3 { font-size: 1.15rem; font-weight: 600; }
+.post p { color: var(--muted); font-size: .94rem; margin-top: 4px; }
+@media (max-width: 600px) { .post { grid-template-columns: 1fr; gap: 4px; } }
+
+/* interests */
+.interests { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 680px) { .interests { grid-template-columns: 1fr; } }
+.interest { border-left: 2px solid var(--accent); padding: 4px 0 4px 18px; }
+.interest h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 6px; }
+.interest p { color: var(--muted); font-size: .96rem; }
+
+/* skills */
+.skills { display: grid; gap: 18px; }
+.skillrow { display: grid; grid-template-columns: 220px 1fr; gap: 32px; align-items: start; }
+.skillrow .chips { margin-top: 0; }
+@media (max-width: 760px) { .skillrow { grid-template-columns: 1fr; gap: 8px; } }
+
+/* contact */
+.contact { margin-top: 88px; padding-block: 72px; border-top: 1px solid var(--line); background: var(--surface); }
+.contact h2 { font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 800; letter-spacing: -.02em; max-width: 18ch; }
+.contact p { color: var(--muted); margin-top: 14px; max-width: 56ch; }
+.email { margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.email code { font-family: var(--mono); font-size: 1.05rem; background: var(--bg); border: 1px solid var(--line); padding: 10px 14px; border-radius: 6px; user-select: all; word-break: break-all; }
+button.copy { font: inherit; font-size: .9rem; cursor: pointer; }
+footer { padding-block: 28px; color: var(--muted); font-size: .85rem; }
+footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+</style>
+</head>
+<body>
+
+<nav class="top" aria-label="Sections">
+  <div class="wrap">
+    <a class="mark" href="#top">RRN</a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#journey">Journey</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#patent">Patent</a></li>
+      <li><a href="#writing">Writing</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <figure class="portrait">
+      <div class="ring"><img src="headshot.jpg" alt="Portrait of Rohith Reddy Narra" width="600" height="600"></div>
+      <figcaption><span class="label">Currently</span><b>Building self-healing data platforms</b></figcaption>
+    </figure>
+    <div>
+      <p class="label">Senior Data Engineer · Walmart</p>
+      <h1 style="margin-top:14px">Rohith <span>Narra</span></h1>
+      <p class="role">I build petabyte-scale data platforms and the <em>agentic AI</em> that keeps them running.</p>
+      <div class="meta">
+        <span class="mono">Austin, TX</span>
+        <span class="mono">6+ yrs in data engineering</span>
+        <span class="mono">MS, Northeastern</span>
+      </div>
+      <div class="links">
+        <a class="btn primary" href="#contact">Get in touch</a>
+        <a class="btn" href="https://www.linkedin.com/in/rohithnarra/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11.25H3zM9.5 9.75h3.8v1.55h.06c.53-1 1.840-2.05 3.78-2.05 4.04 0 4.79 2.66 4.79 6.12V21h-4v-5.08c0-1.21-.02-2.770-1.69-2.77-1.69 0-1.95 1.32-1.950 2.68V21h-4z"/></svg>LinkedIn</a>
+        <a class="btn" href="https://github.com/rohith777" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.050 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>GitHub</a>
+        <a class="btn" href="https://medium.com/@rohith.narra55" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="12" r="5.5"/><ellipse cx="16.5" cy="12" rx="2.8" ry="5.2"/><ellipse cx="21.5" cy="12" rx="1" ry="4.6"/></svg>Medium</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="stats" aria-label="Highlights">
+  <div class="wrap">
+    <div class="stat"><b>6+</b><span>years building data platforms</span></div>
+    <div class="stat"><b>50+</b><span>teams served by pipelines I own</span></div>
+    <div class="stat"><b>1</b><span>US patent publication</span></div>
+  </div>
+</div>
+
+<main>
+<section class="block about" id="about">
+  <div class="wrap">
+    <div class="head"><p class="label">About</p><h2>Reliable data, then intelligent automation on top of it.</h2></div>
+    <div class="indent">
+      <p class="lede">Somewhere between raw data arriving and a decision being made, someone has to make sure the numbers are right. For most of my career, that someone has been me. I build the pipelines that make data trustworthy at scale, and lately, the AI agents that help keep it that way.</p>
+      <p style="margin-top:20px">Most of my work happens before anyone opens a dashboard. By the time a report loads, terabytes of data have already moved through pipelines I built, landing as clean tables that more than 50 teams turn into analytics, ML models and GenAI products. I care most about the parts nobody sees: schemas that don't break, checks that stop bad data before it spreads, and pipelines that hold up on the busiest day of the year.</p>
+      <p>For a while, my job was keeping that flow fast and dependable. Then on-call taught me something. The same failures kept raising the same questions in the middle of the night, and a person had to wake up to answer them every time. So I started teaching the platform to answer them itself. Today I build agentic AI systems on RAG and MCP that read pipeline logs and metadata, validate the data, and triage failures before anyone gets paged.</p>
+      <p>Every stop along the way added a layer. An internship at Oracle got me shipping real code. Two years at TCS taught me how data moves between systems, and what breaks when it doesn't. Northeastern gave me the theory, Qatch taught me to build for traffic I couldn't predict, and Walmart showed me what all of it looks like at petabyte scale.</p>
+      <p>Outside the day job, I'm the person who reads other companies' engineering blogs for fun. When a team publishes how it rebuilt its data platform, I want to know why it works. So I build a small version, push it until it breaks, and work out where it fits. The ideas that survive find their way into production. Streaming with Flink, lakehouse tables with Iceberg and agents built on MCP all started as experiments like that.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="journey">
+  <div class="wrap">
+    <div class="head"><p class="label">Journey</p><h2>Career, read as a pipeline</h2></div>
+    <div class="pipeline" role="list">
+      <div class="node" role="listitem"><span class="mono">2013 – 2017</span><b>Osmania University</b><span>BE, Computer Science · Hyderabad</span></div>
+      <div class="node" role="listitem"><span class="mono">2017</span><b>Oracle</b><span>Software Developer Intern · Hyderabad</span></div>
+      <div class="node" role="listitem"><span class="mono">2017 – 2019</span><b>Tata Consultancy Services</b><span>Systems Engineer · Hyderabad</span></div>
+      <div class="node" role="listitem"><span class="mono">2019 – 2021</span><b>Northeastern University</b><span>MS, Data Analytics Eng. · Seattle</span></div>
+      <div class="node" role="listitem"><span class="mono">2020 – 2021</span><b>Qatch</b><span>Data Engineer Co-op · Boston</span></div>
+      <div class="node now" role="listitem"><span class="mono">2022 – now</span><b>Walmart</b><span>Senior Data Engineer</span></div>
+    </div>
+
+    <article class="role-card">
+      <aside><span class="label chapter">Chapter 1</span><span class="co">Osmania University</span><span class="mono">2013 – 2017</span><span class="label">Hyderabad, India</span></aside>
+      <div>
+        <h3>Finding the data under the code</h3>
+        <p class="title">BE, Computer Science and Engineering · Matrusri Engineering College</p>
+        <div class="story">
+          <p>I walked into Matrusri Engineering College, part of Osmania University, expecting to become a software developer. The first two years fit that plan: engineering math, then Java, C, C++ and data structures.</p>
+          <p>Then, in third year, the syllabus turned to databases, data warehousing, data mining and AI, and something clicked. The questions I found most interesting were no longer about how to write the code. They were about the data underneath it: where it came from, how to shape it, and whether anyone could trust it.</p>
+          <p>A data mining project made that clear. I set out to predict house sale prices from past sales, and most of my time went into getting the data ready with Pandas and NumPy before any modelling in scikit-learn and TensorFlow. The turning point was splitting the data by time instead of at random, so the model learned from the past and was tested on the future, the way it would be used for real. The predictions got noticeably better, and the project was recognized at the college's technical symposium.</p>
+          <p>I left with two convictions: a model is only as good as the data behind it, and I wanted to be the one who builds that foundation.</p>
+        </div>
+      </div>
+    </article>
+
+    <article class="role-card">
+      <aside><span class="label chapter">Chapter 2</span><span class="co">Oracle</span><span class="mono">Jan – Jun 2017</span><span class="label">Hyderabad, India</span></aside>
+      <div>
+        <h3>Stepping into a big codebase</h3>
+        <p class="title">Software Developer Intern · Oracle India</p>
+        <div class="story">
+          <p>In my final semester I joined Oracle India as an intern. Walking into a company that size straight from the classroom was a leap. The codebase was huge, the standards were high, and everyone around me had years of experience I didn't.</p>
+          <p>My work was on the Oracle Application Framework (OAF), which powers the web pages of Oracle E-Business Suite. I built custom UI components with Java, JavaScript, jQuery, HTML and CSS, and tuned the pages I worked on until they loaded 20% faster.</p>
+          <p>The first weeks were humbling. I read a lot of other people's code, asked a lot of questions, and put in extra hours until the framework made sense. By the end I was building components on my own, and I had learned something no course teaches: how to work as an engineer on a real team, with code reviews, deadlines and a bar to meet.</p>
+        </div>
+        <div class="chips"><span class="chip">Java</span><span class="chip">JavaScript</span><span class="chip">jQuery</span><span class="chip">HTML/CSS</span><span class="chip">Oracle OAF</span></div>
+      </div>
+    </article>
+
+    <article class="role-card">
+      <aside><span class="label chapter">Chapter 3</span><span class="co">Tata Consultancy Services</span><span class="mono">Jun 2017 – Jul 2019</span><span class="label">Hyderabad, India</span></aside>
+      <div>
+        <h3>From a coding contest to my first data team</h3>
+        <p class="title">Assistant Systems Engineer → Systems Engineer · Media client</p>
+        <div class="story">
+          <p>My road to TCS started with a contest. In my sixth semester I competed in CodeVita, the global coding competition run by Tata Consultancy Services, and cracked it. That result earned me a job offer before I had even graduated.</p>
+          <p>After graduation I joined TCS as an Assistant Systems Engineer on a team serving a client in the media industry, and was promoted to Systems Engineer along the way. My job was to keep the client's data flowing. I automated Informatica ETL workflows, tuned Amazon Redshift tables and queries so reports came back faster, scheduled API integrations with Control-M and SQL, and built the KPIs behind the client's Tableau sales dashboards.</p>
+          <p>Two years of that taught me something I still work by: a pipeline is only as good as the trust people have in its numbers.</p>
+        </div>
+        <div class="hl"><span><b>~10%</b> faster Redshift queries</span></div>
+        <div class="chips"><span class="chip">Informatica</span><span class="chip">Redshift</span><span class="chip">AWS</span><span class="chip">Tableau</span></div>
+      </div>
+    </article>
+
+    <article class="role-card">
+      <aside><span class="label chapter">Chapter 4</span><span class="co">Northeastern University</span><span class="mono">Sep 2019 – Dec 2021</span><span class="label">Seattle, WA</span></aside>
+      <div>
+        <h3>Going deeper, and wider</h3>
+        <p class="title">MS, Data Analytics Engineering · GPA 3.75</p>
+        <div class="story">
+          <p>After two years of building ETL, I wanted to understand the why behind the how. In September 2019 I moved to Seattle for a master's in Data Analytics Engineering at Northeastern. Courses in database design, data warehousing, data mining, cloud computing, data visualization and statistics filled in the theory under the work I had been doing, and took me deeper into both data engineering and data science.</p>
+          <p>Most of my learning happened in projects. I built a Spark and Snowflake pipeline that pulled US energy data from more than 1,500 API calls, designed a full SQL Server database for a food truck business, and trained an ensemble model to predict breast cancer survivability. Each one sat somewhere between data engineering and machine learning, which is exactly where I wanted to be.</p>
+          <p>Seattle also put me close to the people building data systems at big tech companies. Conversations with Northeastern alumni there showed me how data platforms run at scale and what it takes to build them. Many weekends went to hackathons, where I finished runner-up in the West Coast COVID-19 Hackathon. I also served as a Campus Health Ambassador.</p>
+        </div>
+        <div class="hl"><span><b>3.75</b> GPA</span><span><b>Runner-up</b> West Coast COVID-19 Hackathon</span></div>
+      </div>
+    </article>
+
+    <article class="role-card">
+      <aside><span class="label chapter">Chapter 5</span><span class="co">Qatch</span><span class="mono">Dec 2020 – Aug 2021</span><span class="label">Boston, MA</span></aside>
+      <div>
+        <h3>Wearing every hat at a startup</h3>
+        <p class="title">Data Engineer Co-op · Qatch</p>
+        <div class="story">
+          <p>In my final stretch at Northeastern I joined <a href="https://joinqatch.com/" target="_blank" rel="noopener">Qatch</a> as a Data Engineer Co-op. Qatch calls itself "the group chat for what to buy": a fashion discovery service where stylists curate outfits, finds and brands for shoppers, now trusted by more than 200,000 of them. At a startup, nobody has just one job, and neither did I.</p>
+          <p>I was the data engineer, the analyst and the ML engineer, sometimes in the same week. I built the clickstream pipeline that brought user engagement into BigQuery and PostgreSQL, then kept it standing as traffic grew from about 50 events a day to more than 100,000. More pipelines followed, along with Power BI reports for sales, marketing, customer engagement and investor updates.</p>
+          <p>The work I'm proudest of is the recommendation engine. I helped build the system that suggests products to each shopper based on how they engage, and that work led to my first patent.</p>
+          <p>Qatch gave me room to explore data engineering and machine learning together, with real users on the other end. It shaped my graduate years more than anything else.</p>
+        </div>
+        <div class="hl"><span><b>50 → 100K+</b> events/day</span><span><b>1st</b> patent</span><span><b>3 roles</b> data eng · analytics · ML</span></div>
+        <div class="chips"><span class="chip">BigQuery</span><span class="chip">PostgreSQL</span><span class="chip">Python</span><span class="chip">Power BI</span><span class="chip">Recommender systems</span></div>
+      </div>
+    </article>
+
+    <article class="role-card">
+      <aside><span class="label chapter">Chapter 6</span><span class="co">Walmart</span><span class="mono">Feb 2022 – present</span></aside>
+      <div>
+        <h3>From pipelines to platforms that run themselves</h3>
+        <p class="title">Data Engineer III → Senior Data Engineer · Walmart Global Tech</p>
+        <div class="story">
+          <p>When I walked into Walmart Global Tech in 2022, the scale was the first thing that hit me. At TCS and Qatch I had worked in gigabytes and thousands of events. Here it was terabytes arriving every day and petabytes sitting in the lake, and a single slow job could hold up dozens of teams.</p>
+          <p>I joined the Strategic Data Intelligence team, which buys data from many outside organizations. My corner of it is consumer, commercial and geospatial data. These datasets arrive in different shapes, on different schedules, and with different ideas about quality. My job is to turn each one into data the rest of Walmart can trust, and today more than 50 teams build analytics, ML models and GenAI products on what I deliver.</p>
+          <p>That meant getting to know Spark far better than I ever had. A job that ran fine on a sample would buckle at full volume, so I learned to think in partitions, shuffles and cluster sizes: how to split the data, how to join tables too large to fit anywhere, and how to keep heavy batch loads into Hive, BigQuery and Iceberg finishing on time, every day. Then came streaming. With Kafka and Spark Structured Streaming, data had to be correct the moment it landed, so schema contracts and event-time handling became second nature.</p>
+          <p>Through all of it, one rule never changed: quality and compliance come first. The data comes from outside Walmart, so nothing reaches a downstream team until it has passed validation, schema and volume checks, and governance decides who can see what. A fast pipeline that delivers wrong numbers, or data someone shouldn't have, is worse than no pipeline at all.</p>
+          <p>The latest chapter started on call. I kept walking through the same diagnosis steps week after week, and began to wonder why a person had to. So I built a RAG agent that reads pipeline logs and metadata and explains what broke, then MCP servers so other engineers could build their own agents on the same tools. After years of building pipelines, I'm now building platforms that help run themselves.</p>
+        </div>
+        <div class="hl"><span><b>TB → PB</b> scale</span><span><b>Batch + streaming</b> pipelines</span><span><b>50+</b> dependent teams</span><span><b>Consumer · commercial · geospatial</b> data</span></div>
+        <div class="chips"><span class="chip">Spark</span><span class="chip">Scala</span><span class="chip">Kafka</span><span class="chip">Spark Streaming</span><span class="chip">Hive</span><span class="chip">Iceberg</span><span class="chip">Airflow</span><span class="chip">BigQuery</span><span class="chip">LangChain</span><span class="chip">RAG</span><span class="chip">MCP</span></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="block" id="projects">
+  <div class="wrap">
+    <div class="head"><p class="label">Projects</p><h2>Things I've built</h2></div>
+    <div class="grid">
+      <article class="card">
+        <span class="label">Agentic AI</span>
+        <h3>On-call triage agent</h3>
+        <p>A RAG agent over dataset metadata and pipeline logs that validates runs and explains failures before an engineer opens a dashboard.</p>
+        <div class="foot"><span class="chip">LangChain</span><span class="chip">RAG</span><span class="chip">Vector store</span></div>
+      </article>
+      <article class="card">
+        <span class="label">Real-time analytics</span>
+        <h3>Real-time ad analytics</h3>
+        <p>An end-to-end streaming pipeline that turns ad events into analytics in seconds instead of hours, using Kafka for ingestion, Spark Structured Streaming for processing and Apache Iceberg tables for storage.</p>
+        <div class="foot"><span class="chip">Kafka</span><span class="chip">Spark Streaming</span><span class="chip">Iceberg</span><a href="https://medium.com/@rohith.narra55/seconds-not-hours-real-time-ad-analytics-with-kafka-spark-streaming-and-iceberg-1c4ed6fbdd8f" target="_blank" rel="noopener" style="margin-left:auto">Read the write-up →</a></div>
+      </article>
+      <article class="card">
+        <span class="label">Streaming</span>
+        <h3>Contract-first Kafka streams</h3>
+        <p>Schema Registry contracts and event-time semantics across 10+ consumer groups at sub-minute latency.</p>
+        <div class="foot"><span class="chip">Kafka</span><span class="chip">Spark Streaming</span></div>
+      </article>
+      <article class="card">
+        <span class="label">Platform</span>
+        <h3>Shared MCP tool layer</h3>
+        <p>MCP servers that give agents one standard way to reach data tools, so new agent workflows start from a shared base.</p>
+        <div class="foot"><span class="chip">MCP</span><span class="chip">Python</span></div>
+      </article>
+      <article class="card">
+        <span class="label">Machine learning</span>
+        <h3>Predicting breast cancer survivability</h3>
+        <p>Cut the feature set by 83% using statistical tests, then built an ensemble of neural networks, AdaBoost and logistic regression that improved accuracy by 3%.</p>
+        <div class="foot"><span class="chip">Python</span><span class="chip">scikit-learn</span></div>
+      </article>
+      <article class="card">
+        <span class="label">Data engineering</span>
+        <h3>US energy analysis</h3>
+        <p>Pulled data from 1,500+ API calls and 5 sources, processed it with PySpark and Spark SQL, and loaded it into Snowflake for analysis in Tableau.</p>
+        <div class="foot"><span class="chip">PySpark</span><span class="chip">Snowflake</span><span class="chip">Tableau</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="patent">
+  <div class="wrap">
+    <div class="head"><p class="label">Patent</p><h2>Invention</h2></div>
+    <div class="patent">
+      <div><p class="label">US patent publication</p><p class="num">US 2023/0410182 A1</p><p class="mono" style="color:var(--muted);margin-top:6px">Dec 21, 2023</p></div>
+      <div>
+        <h3>Systems and Methods Handling Mobile Technology Communications</h3>
+        <p>Methods for ingesting, parsing and updating interaction data from mobile messaging to drive personalized recommendation workflows and the analytical data infrastructure behind them. It grew out of the recommendation engine I helped build at Qatch.</p>
+        <p style="margin-top:14px"><a href="https://patents.google.com/patent/US20230410182A1" target="_blank" rel="noopener">View on Google Patents</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="writing">
+  <div class="wrap">
+    <div class="head"><p class="label">Writing &amp; publications</p><h2>Notes from the pipeline</h2></div>
+    <div class="writing">
+      <a class="post" href="https://medium.com/@rohith.narra55/seconds-not-hours-real-time-ad-analytics-with-kafka-spark-streaming-and-iceberg-1c4ed6fbdd8f" target="_blank" rel="noopener"><span class="mono" style="color:var(--muted)">Medium</span><div><h3>Seconds, Not Hours: Real-Time Ad Analytics with Kafka, Spark Streaming and Iceberg</h3><p>Building an ad analytics pipeline that reports in seconds instead of hours, with Kafka, Spark Structured Streaming and Apache Iceberg.</p></div><span class="mono">Read →</span></a>
+      <div class="post"><span class="mono" style="color:var(--muted)">Paper · in progress</span><div><h3>How do we know an AI agent is actually good?</h3><p>A research paper on evaluating agentic LLMs: building composite metrics for agent performance and checking statistically that they measure what they claim to. More once it's published.</p></div><span class="mono"></span></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="interests">
+  <div class="wrap">
+    <div class="head"><p class="label">Interests</p><h2>What I'm exploring</h2></div>
+    <div class="interests">
+      <div class="interest"><h3>Agentic AI for data operations</h3><p>Agents that validate, triage and repair pipelines, with humans approving the risky steps.</p></div>
+      <div class="interest"><h3>MCP servers</h3><p>Standard tool interfaces so agents can safely use the same data systems engineers do.</p></div>
+      <div class="interest"><h3>Real-time streaming</h3><p>Event-time correctness, schema contracts and exactly-once delivery at scale.</p></div>
+      <div class="interest"><h3>Apache Flink</h3><p>Stateful stream processing with low latency, and where it fits next to Spark Structured Streaming.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="skills">
+  <div class="wrap">
+    <div class="head"><p class="label">Toolkit</p><h2>Skills</h2></div>
+    <div class="skills">
+      <div class="skillrow"><span class="label">Core</span><div class="chips"><span class="chip">Spark</span><span class="chip">SQL</span><span class="chip">Python</span><span class="chip">Scala</span><span class="chip">Kafka</span><span class="chip">Airflow</span><span class="chip">Hive</span><span class="chip">Hadoop</span><span class="chip">Hudi</span><span class="chip">Presto</span><span class="chip">Snowflake</span><span class="chip">MongoDB</span></div></div>
+      <div class="skillrow"><span class="label">Cloud</span><div class="chips"><span class="chip">BigQuery</span><span class="chip">GCS</span><span class="chip">Dataproc</span><span class="chip">S3</span><span class="chip">EC2</span><span class="chip">EMR</span><span class="chip">Kinesis</span><span class="chip">Redshift</span></div></div>
+      <div class="skillrow"><span class="label">GenAI systems</span><div class="chips"><span class="chip">MCP</span><span class="chip">RAG</span><span class="chip">LangChain</span><span class="chip">Vector stores</span><span class="chip">Prompt engineering</span><span class="chip">LLM data pipelines</span></div></div>
+      <div class="skillrow"><span class="label">Education</span><div style="display:grid;gap:6px"><div><b>Northeastern University</b>, MS in Data Analytics Engineering <span class="mono" style="color:var(--muted)">· Seattle · 2019 – 2021</span></div><div><b>Matrusri Engineering College, Osmania University</b>, BE in Computer Science and Engineering <span class="mono" style="color:var(--muted)">· Hyderabad · 2013 – 2017</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="recognition">
+  <div class="wrap">
+    <div class="head"><p class="label">Recognition</p><h2>Along the way</h2></div>
+    <div class="recog">
+      <div class="card"><span class="label">Hackathons</span><ul><li>Runner-up, West Coast COVID-19 Hackathon</li></ul></div>
+      <div class="card"><span class="label">Community</span><ul><li>Campus Health Ambassador, Northeastern University</li></ul></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <p class="label">Contact</p>
+    <h2 style="margin-top:12px">Let's talk data platforms and agentic AI.</h2>
+    <p>Open to conversations about data engineering, GenAI infrastructure, speaking and collaboration.</p>
+    <div class="email">
+      <code id="email">rohith.narra55@gmail.com</code>
+      <button class="btn copy" id="copy" type="button">Copy email</button>
+      <a class="btn" href="https://www.linkedin.com/in/rohithnarra/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="https://github.com/rohith777" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</section>
+<footer><div class="wrap"><span>© 2026 Rohith Reddy Narra</span><span class="mono">Austin, TX</span></div></footer>
+
+<script>
+document.getElementById('copy').addEventListener('click', function () {
+  var b = this, t = document.getElementById('email').textContent;
+  var done = function () { b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy email'; }, 1600); };
+  try {
+    navigator.clipboard.writeText(t).then(done, function () {
+      var r = document.createRange(); r.selectNodeContents(document.getElementById('email'));
+      var s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Press ⌘/Ctrl+C';
+    });
+  } catch (e) {}
+});
+</script>
+
+</body>
+</html>
