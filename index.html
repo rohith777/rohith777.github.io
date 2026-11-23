@@ -6,6 +6,15 @@
 <title>Rohith Reddy Narra</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Rohith Reddy Narra: Senior Data Engineer building petabyte-scale data platforms and agentic AI systems.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://rohith777.github.io/">
+<meta property="og:title" content="Rohith Narra · Senior Data Engineer">
+<meta property="og:description" content="I build petabyte-scale data platforms and the agentic AI that keeps them running.">
+<meta property="og:image" content="https://rohith777.github.io/cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://rohith777.github.io/cover.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -229,8 +238,19 @@ footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; g
 .now-card b { display: block; font-family: var(--display); font-weight: 600; font-size: 1rem; line-height: 1.3; }
 .now-card small { color: var(--muted); font-size: .85rem; line-height: 1.45; display: block; margin-top: 2px; }
 @media (max-width: 1180px) { .hero .wrap { grid-template-columns: 240px minmax(0, 1fr); } .now-card { grid-column: 1 / -1; } .now-card ul { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-@media (max-width: 760px) { .now-card ul { grid-template-columns: 1fr; } }
+@media (max-width: 760px) {
+  .hero .wrap { grid-template-columns: 1fr; gap: 24px; padding-block: 32px 40px; }
+  .now-card ul { grid-template-columns: 1fr; }
+  .portrait img { width: 120px; }
+  .hero h1 { font-size: clamp(2.6rem, 13vw, 3.4rem); }
+  .hero .role { font-size: 1.15rem; }
+  .hero .meta { gap: 6px 16px; }
+}
 [hidden] { display: none !important; }
+/* portrait: a plain square photo, no ring and no motion */
+.hero .portrait { width: min(300px, 100%); justify-self: start; align-self: center; }
+.hero .portrait img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 14px; border: 1px solid var(--line); box-shadow: 0 24px 48px -28px rgba(0,0,0,.65); animation: none; }
+@media (max-width: 760px) { .hero .portrait { width: min(240px, 70vw); } .hero .portrait img { width: 100%; } }
 :root { --term-bg: #0a0e14; --term-fg: #d6e2f0; --term-dim: #6f7d90; --term-ok: #8fd19e; }
 nav.top { position: sticky; }
 .progress { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; pointer-events: none; }
@@ -294,6 +314,31 @@ button.node.active::before { box-shadow: 0 0 0 6px color-mix(in srgb, var(--acce
   .pipeline { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 68px); z-index: 5; background: color-mix(in srgb, var(--bg) 94%, transparent); backdrop-filter: blur(8px); padding-block: 16px 14px; border-bottom: 1px solid var(--line); }
   .pipeline::before, .pipeline::after { top: 22px; }
   .packet { top: 15px; }
+}
+/* phone: the pipeline becomes a sticky metro line, and the chapters hang off a rail */
+.node .stop { display: none; }
+@media (max-width: 760px) {
+  .pipeline { position: sticky; top: calc(env(safe-area-inset-top, 0px) + var(--navh, 60px)); z-index: 5; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0; padding: 12px 0 10px; margin: 0 calc(-1 * max(16px, env(safe-area-inset-left))) 22px; padding-inline: max(16px, env(safe-area-inset-left)); background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  .pipeline::before { left: calc(max(16px, env(safe-area-inset-left)) + (100% - 2 * max(16px, env(safe-area-inset-left))) / 12); right: calc(max(16px, env(safe-area-inset-left)) + (100% - 2 * max(16px, env(safe-area-inset-left))) / 12); top: 24px; bottom: auto; width: auto; height: 2px; background: repeating-linear-gradient(90deg, color-mix(in srgb, var(--accent) 45%, transparent) 0 6px, transparent 6px 12px); background-size: 24px 2px; animation: flowx 1.2s linear infinite; }
+  .pipeline::after { left: calc(max(16px, env(safe-area-inset-left)) + (100% - 2 * max(16px, env(safe-area-inset-left))) / 12); top: 24px; height: 2px; width: var(--fx, 0px); }
+  .packet { top: 17px; left: calc(var(--px, 0px) - 1px); width: 16px; height: 16px; }
+  .node { padding: 22px 2px 0; text-align: center; display: grid; justify-items: center; }
+  .node::before { left: 50%; top: 7px; transform: translateX(-50%); width: 12px; height: 12px; }
+  .node > .mono, .node > b, .node > span { display: none; }
+  .node .stop { display: block; font-style: normal; font-family: var(--display); font-weight: 600; font-size: .74rem; line-height: 1.15; color: var(--muted); white-space: nowrap; transition: color .2s, transform .2s; }
+  .node .stop em { display: block; font-style: normal; font-family: var(--mono); font-weight: 400; font-size: .66rem; letter-spacing: .02em; opacity: .8; }
+  .node.active .stop { color: var(--accent); transform: translateY(1px) scale(1.06); }
+  .node.passed::before { background: color-mix(in srgb, var(--accent) 55%, var(--bg)); }
+  .pipeline-hint { display: none; }
+  #journey .role-card { scroll-margin-top: calc(var(--navh, 60px) + 84px); position: relative; padding-left: 26px; border-top: 0; padding-block: 0 34px; }
+  #journey .role-card::before { content: ""; position: absolute; left: 6px; top: 10px; bottom: 0; width: 2px; background: linear-gradient(180deg, var(--accent), color-mix(in srgb, var(--accent) 15%, transparent)); opacity: .45; }
+  #journey .role-card:last-of-type::before { bottom: auto; height: 60px; }
+  #journey .role-card::after { content: ""; position: absolute; left: 0; top: 2px; width: 14px; height: 14px; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent); transition: background .3s, box-shadow .3s; }
+  #journey .role-card.active::after { background: var(--accent); box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 22%, transparent); }
+  #journey .role-card aside { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 12px; }
+  #journey .role-card aside .chapter { flex-basis: 100%; }
+  #journey .role-card aside .co { font-size: 1.5rem; }
+  #journey .role-card aside .label:last-child { flex-basis: 100%; }
 }
 /* projects */
 .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
@@ -365,7 +410,7 @@ button.node.active::before { box-shadow: 0 0 0 6px color-mix(in srgb, var(--acce
   <canvas id="flow" aria-hidden="true"></canvas>
   <div class="wrap">
     <figure class="portrait">
-      <div class="ring"><img src="headshot.jpg" alt="Portrait of Rohith Reddy Narra" width="600" height="600"></div>
+      <img src="headshot.jpg" alt="Portrait of Rohith Reddy Narra" width="600" height="600">
 
     </figure>
     <div>
@@ -421,12 +466,12 @@ button.node.active::before { box-shadow: 0 0 0 6px color-mix(in srgb, var(--acce
   <div class="wrap">
     <div class="head rv"><p class="label">Journey</p><h2>Career, read as a pipeline</h2></div>
     <nav class="pipeline" aria-label="Jump to a chapter">
-      <button class="node" type="button" data-target="chap1"><span class="mono">2013 – 2017</span><b>Osmania University</b><span>BE, Computer Science · Hyderabad</span></button>
-      <button class="node" type="button" data-target="chap2"><span class="mono">2017</span><b>Oracle</b><span>Software Developer Intern · Hyderabad</span></button>
-      <button class="node" type="button" data-target="chap3"><span class="mono">2017 – 2019</span><b>Tata Consultancy Services</b><span>Systems Engineer · Hyderabad</span></button>
-      <button class="node" type="button" data-target="chap4"><span class="mono">2019 – 2021</span><b>Northeastern University</b><span>MS, Data Analytics Eng. · Seattle</span></button>
-      <button class="node" type="button" data-target="chap5"><span class="mono">2020 – 2021</span><b>Qatch</b><span>Data Engineer Co-op · Boston</span></button>
-      <button class="node now" type="button" data-target="chap6"><span class="mono">2022 – now</span><b>Walmart</b><span>Senior Data Engineer</span></button>
+      <button class="node" type="button" data-target="chap1"><i class="stop" aria-hidden="true"><em>'13</em>Osmania</i><span class="mono">2013 – 2017</span><b>Osmania University</b><span>BE, Computer Science · Hyderabad</span></button>
+      <button class="node" type="button" data-target="chap2"><i class="stop" aria-hidden="true"><em>'17</em>Oracle</i><span class="mono">2017</span><b>Oracle</b><span>Software Developer Intern · Hyderabad</span></button>
+      <button class="node" type="button" data-target="chap3"><i class="stop" aria-hidden="true"><em>'17</em>TCS</i><span class="mono">2017 – 2019</span><b>Tata Consultancy Services</b><span>Systems Engineer · Hyderabad</span></button>
+      <button class="node" type="button" data-target="chap4"><i class="stop" aria-hidden="true"><em>'19</em>NEU</i><span class="mono">2019 – 2021</span><b>Northeastern University</b><span>MS, Data Analytics Eng. · Seattle</span></button>
+      <button class="node" type="button" data-target="chap5"><i class="stop" aria-hidden="true"><em>'20</em>Qatch</i><span class="mono">2020 – 2021</span><b>Qatch</b><span>Data Engineer Co-op · Boston</span></button>
+      <button class="node now" type="button" data-target="chap6"><i class="stop" aria-hidden="true"><em>'22</em>Walmart</i><span class="mono">2022 – now</span><b>Walmart</b><span>Senior Data Engineer</span></button>
       <span class="packet" aria-hidden="true"></span>
     </nav>
     <p class="pipeline-hint">Six chapters, oldest first. Tap a stop to jump to it.</p>
@@ -767,13 +812,16 @@ button.node.active::before { box-shadow: 0 0 0 6px color-mix(in srgb, var(--acce
   var tabs = $$('.pipeline .node'), panels = $$('#journey .role-card'), pl = $('.pipeline'), cur = 0;
   function place() {
     var b = tabs[cur]; if (!b || !pl) return;
-    var r = b.getBoundingClientRect(), pr = pl.getBoundingClientRect();
-    pl.style.setProperty('--px', (r.left - pr.left) + 'px');
+    var r = b.getBoundingClientRect(), pr = pl.getBoundingClientRect(), mob = innerWidth <= 760;
+    var nav = document.querySelector('nav.top'); if (nav) document.documentElement.style.setProperty('--navh', nav.offsetHeight + 'px');
+    pl.style.setProperty('--px', (r.left - pr.left + (mob ? r.width / 2 - 7 : 0)) + 'px');
+    var f = tabs[0].getBoundingClientRect(); pl.style.setProperty('--fx', (r.left + r.width / 2 - f.left - f.width / 2) + 'px');
     pl.style.setProperty('--py', (r.top - pr.top) + 'px');
   }
   function mark(i) {
     cur = i;
-    tabs.forEach(function (b, k) { b.classList.toggle('active', k === i); if (k === i) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current'); });
+    panels.forEach(function (p, k) { p.classList.toggle('active', k === i); });
+    tabs.forEach(function (b, k) { b.classList.toggle('active', k === i); b.classList.toggle('passed', k < i); if (k === i) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current'); });
     place();
   }
   tabs.forEach(function (b, k) {
