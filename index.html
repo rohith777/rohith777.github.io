@@ -35,7 +35,7 @@
   --bg: #f5f7fa; --surface: #ffffff; --line: #dbe1ea; --fg: #121823; --muted: #5a6577;
   --accent: #1f5aa6; --accent-ink: #ffffff; --todo: #9a6a00; color-scheme: light;
 }
-* { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }
 body {
@@ -46,9 +46,9 @@ body {
 a { color: var(--accent); text-underline-offset: 3px; }
 a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
 .wrap {
-  max-width: 1080px; margin: 0 auto;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  max-width: 1360px; margin: 0 auto;
+  padding-left: max(clamp(16px, 4vw, 56px), env(safe-area-inset-left, 0px));
+  padding-right: max(clamp(16px, 4vw, 56px), env(safe-area-inset-right, 0px));
 }
 h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; }
 p { margin: 0; }
@@ -70,10 +70,10 @@ nav.top ul a:hover { color: var(--fg); }
 @media (max-width: 760px) { nav.top ul { display: none; } }
 
 /* hero */
-.hero .wrap { display: grid; grid-template-columns: 232px 1fr; gap: 48px; align-items: center; padding-block: 72px 56px; }
-.hero h1 { font-size: clamp(2.6rem, 6.4vw, 4.8rem); font-weight: 800; line-height: .98; letter-spacing: -.02em; }
+.hero .wrap { display: grid; grid-template-columns: 280px minmax(0, 1fr) 340px; gap: 48px; align-items: center; padding-block: 72px 56px; }
+.hero h1 { font-size: clamp(2.6rem, 5.6vw, 5.6rem); font-weight: 800; line-height: .98; letter-spacing: -.02em; }
 .hero h1 span { color: var(--muted); font-weight: 400; }
-.hero .role { margin-top: 20px; font-size: 1.25rem; color: var(--fg); max-width: 34ch; }
+.hero .role { margin-top: 20px; font-size: clamp(1.25rem, 1.6vw, 1.5rem); color: var(--fg); max-width: 40ch; }
 .hero .role em { font-style: normal; color: var(--accent); }
 .hero .meta { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 8px 20px; color: var(--muted); }
 .links { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px; }
@@ -87,7 +87,7 @@ nav.top ul a:hover { color: var(--fg); }
 .btn svg { width: 16px; height: 16px; fill: currentColor; flex: none; }
 .portrait { margin: 0; display: grid; gap: 14px; justify-items: center; align-self: start; }
 .portrait .ring { padding: 6px; border-radius: 50%; border: 1px solid var(--line); background: conic-gradient(from 200deg, var(--accent), transparent 35%, transparent 65%, var(--accent)); }
-.portrait img { display: block; width: 220px; height: auto; max-width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 50%; border: 4px solid var(--bg); }
+.portrait img { display: block; width: 260px; height: auto; max-width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 50%; border: 4px solid var(--bg); }
 .portrait figcaption { text-align: center; }
 .portrait figcaption b { display: block; font-family: var(--display); font-weight: 600; font-size: 1rem; margin-top: 2px; }
 @media (max-width: 760px) {
@@ -118,7 +118,7 @@ section.block { padding-block: 88px 0; }
 @media (max-width: 760px) { .head { grid-template-columns: 1fr; gap: 6px; } section.block { padding-block: 64px 0; } }
 .indent { margin-left: 252px; }
 @media (max-width: 760px) { .indent { margin-left: 0; } }
-.about p { max-width: 64ch; color: var(--fg); }
+.about p { max-width: 76ch; color: var(--fg); }
 .about p + p { margin-top: 16px; }
 .about .lede { font-size: 1.3rem; line-height: 1.5; font-family: var(--display); font-weight: 400; }
 
@@ -149,7 +149,7 @@ section.block { padding-block: 88px 0; }
 .role-card aside { display: grid; gap: 6px; align-content: start; }
 .role-card aside .co { font-family: var(--display); font-size: 1.4rem; font-weight: 600; }
 .role-card h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 14px; }
-.role-card ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; max-width: 70ch; }
+.role-card ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; max-width: 78ch; }
 .role-card li { position: relative; padding-left: 20px; color: var(--fg); }
 .role-card li::before { content: "›"; position: absolute; left: 2px; color: var(--accent); font-weight: 600; }
 .role-card li strong { color: var(--accent); font-weight: 500; }
@@ -160,7 +160,7 @@ details.more summary { cursor: pointer; color: var(--accent); font-size: .92rem;
 details.more ul { margin-top: 12px; }
 @media (max-width: 760px) { .role-card { grid-template-columns: 1fr; gap: 12px; } }
 
-.story { max-width: 66ch; display: grid; gap: 14px; }
+.story { max-width: 78ch; display: grid; gap: 14px; }
 .story p { color: var(--fg); }
 .role-card .title { color: var(--muted); font-family: var(--mono); font-size: .8rem; letter-spacing: .04em; margin: -8px 0 16px; }
 .hl { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 18px; padding-top: 14px; border-top: 1px dashed var(--line); }
@@ -185,7 +185,7 @@ details.more ul { margin-top: 12px; }
 .patent { display: grid; grid-template-columns: 180px 1fr; gap: 32px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 32px; }
 .patent .num { font-family: var(--mono); font-size: 1rem; color: var(--accent); word-break: break-all; }
 .patent h3 { font-size: 1.45rem; font-weight: 600; margin-bottom: 10px; }
-.patent p { color: var(--muted); max-width: 62ch; }
+.patent p { color: var(--muted); max-width: 80ch; }
 @media (max-width: 680px) { .patent { grid-template-columns: 1fr; gap: 12px; padding: 22px; } }
 
 /* writing list */
@@ -196,7 +196,8 @@ details.more ul { margin-top: 12px; }
 @media (max-width: 600px) { .post { grid-template-columns: 1fr; gap: 4px; } }
 
 /* interests */
-.interests { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.interests { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 1100px) { .interests { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 680px) { .interests { grid-template-columns: 1fr; } }
 .interest { border-left: 2px solid var(--accent); padding: 4px 0 4px 18px; }
 .interest h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 6px; }
@@ -211,12 +212,133 @@ details.more ul { margin-top: 12px; }
 /* contact */
 .contact { margin-top: 88px; padding-block: 72px; border-top: 1px solid var(--line); background: var(--surface); }
 .contact h2 { font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 800; letter-spacing: -.02em; max-width: 18ch; }
-.contact p { color: var(--muted); margin-top: 14px; max-width: 56ch; }
+.contact p { color: var(--muted); margin-top: 14px; max-width: 60ch; }
 .email { margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
 .email code { font-family: var(--mono); font-size: 1.05rem; background: var(--bg); border: 1px solid var(--line); padding: 10px 14px; border-radius: 6px; user-select: all; word-break: break-all; }
 button.copy { font: inherit; font-size: .9rem; cursor: pointer; }
 footer { padding-block: 28px; color: var(--muted); font-size: .85rem; }
 footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+
+/* ---------- interactive layer ---------- */
+.now-card { align-self: center; background: color-mix(in srgb, var(--surface) 85%, transparent); backdrop-filter: blur(6px); border: 1px solid var(--line); border-radius: 12px; padding: 22px 22px 18px; display: grid; gap: 14px; }
+.now-card ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.now-card li { display: grid; grid-template-columns: 10px 1fr; gap: 12px; align-items: start; }
+.now-card li::before { content: ""; width: 8px; height: 8px; margin-top: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 20%, transparent); animation: pulse 2.4s ease-in-out infinite; }
+.now-card li:nth-child(2)::before { animation-delay: .6s; } .now-card li:nth-child(3)::before { animation-delay: 1.2s; }
+@keyframes pulse { 50% { box-shadow: 0 0 0 8px color-mix(in srgb, var(--accent) 0%, transparent); } }
+.now-card b { display: block; font-family: var(--display); font-weight: 600; font-size: 1rem; line-height: 1.3; }
+.now-card small { color: var(--muted); font-size: .85rem; line-height: 1.45; display: block; margin-top: 2px; }
+@media (max-width: 1180px) { .hero .wrap { grid-template-columns: 240px minmax(0, 1fr); } .now-card { grid-column: 1 / -1; } .now-card ul { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 760px) { .now-card ul { grid-template-columns: 1fr; } }
+[hidden] { display: none !important; }
+:root { --term-bg: #0a0e14; --term-fg: #d6e2f0; --term-dim: #6f7d90; --term-ok: #8fd19e; }
+nav.top { position: sticky; }
+.progress { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; pointer-events: none; }
+.progress i { display: block; height: 100%; width: 0; background: var(--accent); box-shadow: 0 0 12px var(--accent); }
+.navr { display: flex; align-items: center; gap: 20px; }
+nav.top ul a { position: relative; transition: color .2s; }
+nav.top ul a.active { color: var(--fg); }
+nav.top ul a.active::after { content: ""; position: absolute; left: 0; right: 0; bottom: -7px; height: 2px; border-radius: 2px; background: var(--accent); }
+.theme { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--fg); display: grid; place-items: center; cursor: pointer; transition: border-color .2s, transform .3s; }
+.theme:hover { border-color: var(--accent); transform: rotate(20deg); }
+.theme svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.theme .sun { display: none; }
+:root[data-theme="light"] .theme .sun { display: block; } :root[data-theme="light"] .theme .moon { display: none; }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .theme .sun { display: block; } :root:not([data-theme="dark"]) .theme .moon { display: none; } }
+
+.hero { position: relative; overflow: hidden; isolation: isolate; }
+#flow { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent); mask-image: linear-gradient(180deg, #000 55%, transparent); }
+.hero::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(600px circle at 18% 40%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 70%); }
+.portrait .ring { animation: spin 16s linear infinite; }
+.portrait .ring img { animation: spin 16s linear infinite reverse; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.rot { display: inline-block; color: var(--accent); transition: opacity .35s, transform .35s; }
+.rot.out { opacity: 0; transform: translateY(8px); }
+.caret { display: inline-block; width: 2px; height: 1em; margin-left: 3px; vertical-align: -2px; background: var(--accent); animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+.stat b { transition: color .3s; }
+.stat:hover b { color: var(--accent); }
+
+/* journey: interactive pipeline */
+.pipeline::before { background: repeating-linear-gradient(90deg, color-mix(in srgb, var(--accent) 45%, transparent) 0 8px, transparent 8px 16px); background-size: 32px 2px; animation: flowx 1.2s linear infinite; }
+@keyframes flowx { to { background-position: 32px 0; } }
+.pipeline::after { content: ""; position: absolute; left: 6px; top: 6px; height: 2px; width: var(--px, 0px); background: var(--accent); box-shadow: 0 0 10px var(--accent); transition: width .6s cubic-bezier(.2,.8,.2,1); }
+.packet { position: absolute; z-index: 2; top: -1px; left: calc(var(--px, 0px) - 1px); width: 16px; height: 16px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 25%, transparent), 0 0 24px var(--accent); transition: left .6s cubic-bezier(.2,.8,.2,1), top .6s cubic-bezier(.2,.8,.2,1); pointer-events: none; }
+button.node { font: inherit; color: inherit; background: none; border: 0; text-align: left; cursor: pointer; border-radius: 6px; }
+button.node b, button.node span { transition: color .2s; }
+button.node:hover b, button.node.active b { color: var(--accent); }
+button.node.now::before { background: var(--bg); box-shadow: none; }
+button.node.active::before { background: var(--accent); }
+.pipeline-hint { margin: -28px 0 28px; color: var(--muted); font-size: .85rem; }
+#journey .role-card.enter { animation: chapIn .5s cubic-bezier(.2,.8,.2,1); }
+@keyframes chapIn { from { opacity: 0; transform: translateY(14px); } }
+#journey:not(.all) .role-card { border-top: 0; padding-top: 8px; }
+.chap-ctrl { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding-top: 20px; border-top: 1px solid var(--line); }
+.chap-ctrl .count { font-family: var(--mono); font-size: .8rem; color: var(--muted); margin-right: auto; }
+.chap-ctrl .btn { cursor: pointer; font: inherit; font-size: .9rem; }
+.chap-ctrl .btn:disabled { opacity: .4; cursor: default; transform: none; }
+
+@media (max-width: 760px) {
+  .pipeline::before { background: repeating-linear-gradient(180deg, color-mix(in srgb, var(--accent) 45%, transparent) 0 8px, transparent 8px 16px); background-size: 2px 32px; animation: flowy 1.2s linear infinite; }
+  @keyframes flowy { to { background-position: 0 32px; } }
+  .pipeline::after { width: 2px; height: var(--py, 0px); }
+  .packet { left: -1px; top: calc(var(--py, 0px) + 3px); }
+  .pipeline-hint { margin-top: -10px; }
+}
+
+
+#journey .role-card { scroll-margin-top: 230px; }
+button.node.active::before { box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 22%, transparent); }
+@media (min-width: 761px) {
+  .pipeline { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 68px); z-index: 5; background: color-mix(in srgb, var(--bg) 94%, transparent); backdrop-filter: blur(8px); padding-block: 16px 14px; border-bottom: 1px solid var(--line); }
+  .pipeline::before, .pipeline::after { top: 22px; }
+  .packet { top: 15px; }
+}
+/* projects */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+.filter { font: inherit; font-size: .88rem; cursor: pointer; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--muted); transition: all .2s; }
+.filter:hover { color: var(--fg); border-color: var(--accent); }
+.filter[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
+.grid .card { transition: transform .25s ease, border-color .25s, box-shadow .25s; will-change: transform; }
+.grid .card:hover { box-shadow: 0 18px 40px -18px color-mix(in srgb, var(--accent) 45%, transparent); }
+.grid .card.pop { animation: pop .4s cubic-bezier(.2,.8,.2,1); }
+@keyframes pop { from { opacity: 0; transform: scale(.96); } }
+.spot { position: relative; overflow: hidden; }
+.spot::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .3s; background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 0%), color-mix(in srgb, var(--accent) 16%, transparent), transparent 65%); }
+.spot:hover::before { opacity: 1; }
+.spot:hover { border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); }
+.spot > * { position: relative; }
+
+/* interests as tiles */
+.interest { background: var(--surface); border: 1px solid var(--line); border-left: 2px solid var(--accent); border-radius: 8px; padding: 18px 20px; transition: border-color .25s, transform .25s; }
+.interest:hover { transform: translateY(-3px); }
+
+/* chips */
+.chip { transition: border-color .2s, color .2s, background .2s; }
+.chip:hover, .chip.match { border-color: var(--accent); color: var(--fg); background: color-mix(in srgb, var(--accent) 12%, var(--surface)); }
+#skills .chip { cursor: default; }
+
+/* reveal: elements stay visible at rest and lift in when scrolled to */
+.rv.in { animation: lift .6s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes lift { from { opacity: .3; transform: translateY(18px); } }
+
+/* contact terminal */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+@media (max-width: 860px) { .contact-grid { grid-template-columns: 1fr; } }
+.term { background: var(--term-bg); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; box-shadow: 0 30px 60px -30px rgb(0 0 0 / .5); min-width: 0; }
+.term-bar { display: flex; align-items: center; gap: 7px; padding: 10px 14px; border-bottom: 1px solid rgb(255 255 255 / .06); }
+.term-bar i { width: 11px; height: 11px; border-radius: 50%; background: #3a4352; }
+.term-bar i:first-child { background: #e0605a; } .term-bar i:nth-child(2) { background: #e3b341; } .term-bar i:nth-child(3) { background: #5fbf6a; }
+.term-bar span { margin-left: 8px; font-family: var(--mono); font-size: .75rem; color: var(--term-dim); }
+.term pre { margin: 0; padding: 18px 18px 22px; font-family: var(--mono); font-size: .85rem; line-height: 1.75; color: var(--term-fg); white-space: pre-wrap; word-break: break-word; min-height: 13.5em; }
+.term .p { color: var(--term-ok); }
+.term .o { color: var(--term-dim); }
+.term .hl2 { color: #9cc5f2; }
+
+@media (prefers-reduced-motion: reduce) {
+  .portrait .ring, .portrait .ring img, .pipeline::before, .caret { animation: none !important; }
+}
 </style>
 </head>
 <body>
@@ -224,6 +346,7 @@ footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; g
 <nav class="top" aria-label="Sections">
   <div class="wrap">
     <a class="mark" href="#top">RRN</a>
+    <div class="navr">
     <ul>
       <li><a href="#about">About</a></li>
       <li><a href="#journey">Journey</a></li>
@@ -232,19 +355,23 @@ footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; g
       <li><a href="#writing">Writing</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <button class="theme" id="theme" type="button" aria-label="Switch light or dark theme"><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+    </div>
   </div>
+  <div class="progress" aria-hidden="true"><i id="prog"></i></div>
 </nav>
 
 <header class="hero" id="top">
+  <canvas id="flow" aria-hidden="true"></canvas>
   <div class="wrap">
     <figure class="portrait">
       <div class="ring"><img src="headshot.jpg" alt="Portrait of Rohith Reddy Narra" width="600" height="600"></div>
-      <figcaption><span class="label">Currently</span><b>Building self-healing data platforms</b></figcaption>
+
     </figure>
     <div>
       <p class="label">Senior Data Engineer · Walmart</p>
       <h1 style="margin-top:14px">Rohith <span>Narra</span></h1>
-      <p class="role">I build petabyte-scale data platforms and the <em>agentic AI</em> that keeps them running.</p>
+      <p class="role">I build petabyte-scale data platforms and the <span class="rot" id="rot" aria-live="off" data-phrases='["agentic AI that keeps them running", "streaming pipelines that keep them fresh", "quality checks that keep them honest"]'>agentic AI that keeps them running</span><span class="caret" aria-hidden="true"></span></p>
       <div class="meta">
         <span class="mono">Austin, TX</span>
         <span class="mono">6+ yrs in data engineering</span>
@@ -257,24 +384,32 @@ footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; g
         <a class="btn" href="https://medium.com/@rohith.narra55" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="12" r="5.5"/><ellipse cx="16.5" cy="12" rx="2.8" ry="5.2"/><ellipse cx="21.5" cy="12" rx="1" ry="4.6"/></svg>Medium</a>
       </div>
     </div>
+    <aside class="now-card spot" aria-label="What I'm working on now">
+      <p class="label">Right now</p>
+      <ul>
+        <li><div><b>Self-healing data platforms</b><small>RAG agents and MCP servers that triage pipeline failures</small></div></li>
+        <li><div><b>Research on evaluating AI agents</b><small>Paper in progress on measuring agent quality</small></div></li>
+        <li><div><b>Exploring Apache Flink</b><small>Stateful, low-latency stream processing</small></div></li>
+      </ul>
+    </aside>
   </div>
 </header>
 
 <div class="stats" aria-label="Highlights">
   <div class="wrap">
-    <div class="stat"><b>6+</b><span>years building data platforms</span></div>
-    <div class="stat"><b>50+</b><span>teams served by pipelines I own</span></div>
-    <div class="stat"><b>1</b><span>US patent publication</span></div>
+    <div class="stat"><b data-count="6" data-suffix="+">6+</b><span>years building data platforms</span></div>
+    <div class="stat"><b data-count="30" data-suffix="+">30+</b><span>teams served by pipelines I own</span></div>
+    <div class="stat"><b data-count="1">1</b><span>US patent publication</span></div>
   </div>
 </div>
 
 <main>
 <section class="block about" id="about">
   <div class="wrap">
-    <div class="head"><p class="label">About</p><h2>Reliable data, then intelligent automation on top of it.</h2></div>
+    <div class="head rv"><p class="label">About</p><h2>Reliable data, then intelligent automation on top of it.</h2></div>
     <div class="indent">
       <p class="lede">Somewhere between raw data arriving and a decision being made, someone has to make sure the numbers are right. For most of my career, that someone has been me. I build the pipelines that make data trustworthy at scale, and lately, the AI agents that help keep it that way.</p>
-      <p style="margin-top:20px">Most of my work happens before anyone opens a dashboard. By the time a report loads, terabytes of data have already moved through pipelines I built, landing as clean tables that more than 50 teams turn into analytics, ML models and GenAI products. I care most about the parts nobody sees: schemas that don't break, checks that stop bad data before it spreads, and pipelines that hold up on the busiest day of the year.</p>
+      <p style="margin-top:20px">Most of my work happens before anyone opens a dashboard. By the time a report loads, terabytes of data have already moved through pipelines I built, landing as clean tables that more than 30 teams turn into analytics, ML models and GenAI products. I care most about the parts nobody sees: schemas that don't break, checks that stop bad data before it spreads, and pipelines that hold up on the busiest day of the year.</p>
       <p>For a while, my job was keeping that flow fast and dependable. Then on-call taught me something. The same failures kept raising the same questions in the middle of the night, and a person had to wake up to answer them every time. So I started teaching the platform to answer them itself. Today I build agentic AI systems on RAG and MCP that read pipeline logs and metadata, validate the data, and triage failures before anyone gets paged.</p>
       <p>Every stop along the way added a layer. An internship at Oracle got me shipping real code. Two years at TCS taught me how data moves between systems, and what breaks when it doesn't. Northeastern gave me the theory, Qatch taught me to build for traffic I couldn't predict, and Walmart showed me what all of it looks like at petabyte scale.</p>
       <p>Outside the day job, I'm the person who reads other companies' engineering blogs for fun. When a team publishes how it rebuilt its data platform, I want to know why it works. So I build a small version, push it until it breaks, and work out where it fits. The ideas that survive find their way into production. Streaming with Flink, lakehouse tables with Iceberg and agents built on MCP all started as experiments like that.</p>
@@ -282,19 +417,21 @@ footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; g
   </div>
 </section>
 
-<section class="block" id="journey">
+<section class="block all" id="journey">
   <div class="wrap">
-    <div class="head"><p class="label">Journey</p><h2>Career, read as a pipeline</h2></div>
-    <div class="pipeline" role="list">
-      <div class="node" role="listitem"><span class="mono">2013 – 2017</span><b>Osmania University</b><span>BE, Computer Science · Hyderabad</span></div>
-      <div class="node" role="listitem"><span class="mono">2017</span><b>Oracle</b><span>Software Developer Intern · Hyderabad</span></div>
-      <div class="node" role="listitem"><span class="mono">2017 – 2019</span><b>Tata Consultancy Services</b><span>Systems Engineer · Hyderabad</span></div>
-      <div class="node" role="listitem"><span class="mono">2019 – 2021</span><b>Northeastern University</b><span>MS, Data Analytics Eng. · Seattle</span></div>
-      <div class="node" role="listitem"><span class="mono">2020 – 2021</span><b>Qatch</b><span>Data Engineer Co-op · Boston</span></div>
-      <div class="node now" role="listitem"><span class="mono">2022 – now</span><b>Walmart</b><span>Senior Data Engineer</span></div>
-    </div>
+    <div class="head rv"><p class="label">Journey</p><h2>Career, read as a pipeline</h2></div>
+    <nav class="pipeline" aria-label="Jump to a chapter">
+      <button class="node" type="button" data-target="chap1"><span class="mono">2013 – 2017</span><b>Osmania University</b><span>BE, Computer Science · Hyderabad</span></button>
+      <button class="node" type="button" data-target="chap2"><span class="mono">2017</span><b>Oracle</b><span>Software Developer Intern · Hyderabad</span></button>
+      <button class="node" type="button" data-target="chap3"><span class="mono">2017 – 2019</span><b>Tata Consultancy Services</b><span>Systems Engineer · Hyderabad</span></button>
+      <button class="node" type="button" data-target="chap4"><span class="mono">2019 – 2021</span><b>Northeastern University</b><span>MS, Data Analytics Eng. · Seattle</span></button>
+      <button class="node" type="button" data-target="chap5"><span class="mono">2020 – 2021</span><b>Qatch</b><span>Data Engineer Co-op · Boston</span></button>
+      <button class="node now" type="button" data-target="chap6"><span class="mono">2022 – now</span><b>Walmart</b><span>Senior Data Engineer</span></button>
+      <span class="packet" aria-hidden="true"></span>
+    </nav>
+    <p class="pipeline-hint">Six chapters, oldest first. Tap a stop to jump to it.</p>
 
-    <article class="role-card">
+    <article class="role-card" id="chap1">
       <aside><span class="label chapter">Chapter 1</span><span class="co">Osmania University</span><span class="mono">2013 – 2017</span><span class="label">Hyderabad, India</span></aside>
       <div>
         <h3>Finding the data under the code</h3>
@@ -308,7 +445,7 @@ footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; g
       </div>
     </article>
 
-    <article class="role-card">
+    <article class="role-card" id="chap2">
       <aside><span class="label chapter">Chapter 2</span><span class="co">Oracle</span><span class="mono">Jan – Jun 2017</span><span class="label">Hyderabad, India</span></aside>
       <div>
         <h3>Stepping into a big codebase</h3>
@@ -322,7 +459,7 @@ footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; g
       </div>
     </article>
 
-    <article class="role-card">
+    <article class="role-card" id="chap3">
       <aside><span class="label chapter">Chapter 3</span><span class="co">Tata Consultancy Services</span><span class="mono">Jun 2017 – Jul 2019</span><span class="label">Hyderabad, India</span></aside>
       <div>
         <h3>From a coding contest to my first data team</h3>
@@ -337,7 +474,7 @@ footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; g
       </div>
     </article>
 
-    <article class="role-card">
+    <article class="role-card" id="chap4">
       <aside><span class="label chapter">Chapter 4</span><span class="co">Northeastern University</span><span class="mono">Sep 2019 – Dec 2021</span><span class="label">Seattle, WA</span></aside>
       <div>
         <h3>Going deeper, and wider</h3>
@@ -351,13 +488,13 @@ footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; g
       </div>
     </article>
 
-    <article class="role-card">
+    <article class="role-card" id="chap5">
       <aside><span class="label chapter">Chapter 5</span><span class="co">Qatch</span><span class="mono">Dec 2020 – Aug 2021</span><span class="label">Boston, MA</span></aside>
       <div>
         <h3>Wearing every hat at a startup</h3>
         <p class="title">Data Engineer Co-op · Qatch</p>
         <div class="story">
-          <p>In my final stretch at Northeastern I joined <a href="https://joinqatch.com/" target="_blank" rel="noopener">Qatch</a> as a Data Engineer Co-op. Qatch calls itself "the group chat for what to buy": a fashion discovery service where stylists curate outfits, finds and brands for shoppers, now trusted by more than 200,000 of them. At a startup, nobody has just one job, and neither did I.</p>
+          <p>In my final stretch at Northeastern I joined Qatch as a Data Engineer Co-op. Qatch calls itself "the group chat for what to buy": a fashion discovery service where stylists curate outfits, finds and brands for shoppers, now trusted by more than 200,000 of them. At a startup, nobody has just one job, and neither did I.</p>
           <p>I was the data engineer, the analyst and the ML engineer, sometimes in the same week. I built the clickstream pipeline that brought user engagement into BigQuery and PostgreSQL, then kept it standing as traffic grew from about 50 events a day to more than 100,000. More pipelines followed, along with Power BI reports for sales, marketing, customer engagement and investor updates.</p>
           <p>The work I'm proudest of is the recommendation engine. I helped build the system that suggests products to each shopper based on how they engage, and that work led to my first patent.</p>
           <p>Qatch gave me room to explore data engineering and machine learning together, with real users on the other end. It shaped my graduate years more than anything else.</p>
@@ -367,19 +504,19 @@ footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; g
       </div>
     </article>
 
-    <article class="role-card">
+    <article class="role-card" id="chap6">
       <aside><span class="label chapter">Chapter 6</span><span class="co">Walmart</span><span class="mono">Feb 2022 – present</span></aside>
       <div>
         <h3>From pipelines to platforms that run themselves</h3>
         <p class="title">Data Engineer III → Senior Data Engineer · Walmart Global Tech</p>
         <div class="story">
           <p>When I walked into Walmart Global Tech in 2022, the scale was the first thing that hit me. At TCS and Qatch I had worked in gigabytes and thousands of events. Here it was terabytes arriving every day and petabytes sitting in the lake, and a single slow job could hold up dozens of teams.</p>
-          <p>I joined the Strategic Data Intelligence team, which buys data from many outside organizations. My corner of it is consumer, commercial and geospatial data. These datasets arrive in different shapes, on different schedules, and with different ideas about quality. My job is to turn each one into data the rest of Walmart can trust, and today more than 50 teams build analytics, ML models and GenAI products on what I deliver.</p>
+          <p>I joined the Strategic Data Intelligence team, which buys data from many outside organizations. My corner of it is consumer, commercial and geospatial data. These datasets arrive in different shapes, on different schedules, and with different ideas about quality. My job is to turn each one into data the rest of Walmart can trust, and today more than 30 teams build analytics, ML models and GenAI products on what I deliver.</p>
           <p>That meant getting to know Spark far better than I ever had. A job that ran fine on a sample would buckle at full volume, so I learned to think in partitions, shuffles and cluster sizes: how to split the data, how to join tables too large to fit anywhere, and how to keep heavy batch loads into Hive, BigQuery and Iceberg finishing on time, every day. Then came streaming. With Kafka and Spark Structured Streaming, data had to be correct the moment it landed, so schema contracts and event-time handling became second nature.</p>
           <p>Through all of it, one rule never changed: quality and compliance come first. The data comes from outside Walmart, so nothing reaches a downstream team until it has passed validation, schema and volume checks, and governance decides who can see what. A fast pipeline that delivers wrong numbers, or data someone shouldn't have, is worse than no pipeline at all.</p>
           <p>The latest chapter started on call. I kept walking through the same diagnosis steps week after week, and began to wonder why a person had to. So I built a RAG agent that reads pipeline logs and metadata and explains what broke, then MCP servers so other engineers could build their own agents on the same tools. After years of building pipelines, I'm now building platforms that help run themselves.</p>
         </div>
-        <div class="hl"><span><b>TB → PB</b> scale</span><span><b>Batch + streaming</b> pipelines</span><span><b>50+</b> dependent teams</span><span><b>Consumer · commercial · geospatial</b> data</span></div>
+        <div class="hl"><span><b>TB → PB</b> scale</span><span><b>Batch + streaming</b> pipelines</span><span><b>30+</b> dependent teams</span><span><b>Consumer · commercial · geospatial</b> data</span></div>
         <div class="chips"><span class="chip">Spark</span><span class="chip">Scala</span><span class="chip">Kafka</span><span class="chip">Spark Streaming</span><span class="chip">Hive</span><span class="chip">Iceberg</span><span class="chip">Airflow</span><span class="chip">BigQuery</span><span class="chip">LangChain</span><span class="chip">RAG</span><span class="chip">MCP</span></div>
       </div>
     </article>
@@ -388,39 +525,46 @@ footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; g
 
 <section class="block" id="projects">
   <div class="wrap">
-    <div class="head"><p class="label">Projects</p><h2>Things I've built</h2></div>
+    <div class="head rv"><p class="label">Projects</p><h2>Things I've built</h2></div>
+    <div class="filters" role="group" aria-label="Filter projects">
+      <button class="filter" type="button" data-f="all" aria-pressed="true">All</button>
+      <button class="filter" type="button" data-f="ai" aria-pressed="false">Agentic AI</button>
+      <button class="filter" type="button" data-f="streaming" aria-pressed="false">Streaming</button>
+      <button class="filter" type="button" data-f="ml" aria-pressed="false">Machine learning</button>
+      <button class="filter" type="button" data-f="data" aria-pressed="false">Data engineering</button>
+    </div>
     <div class="grid">
-      <article class="card">
+      <article class="card spot rv" data-cat="ai">
         <span class="label">Agentic AI</span>
         <h3>On-call triage agent</h3>
         <p>A RAG agent over dataset metadata and pipeline logs that validates runs and explains failures before an engineer opens a dashboard.</p>
         <div class="foot"><span class="chip">LangChain</span><span class="chip">RAG</span><span class="chip">Vector store</span></div>
       </article>
-      <article class="card">
+      <article class="card spot rv" data-cat="streaming">
         <span class="label">Real-time analytics</span>
         <h3>Real-time ad analytics</h3>
         <p>An end-to-end streaming pipeline that turns ad events into analytics in seconds instead of hours, using Kafka for ingestion, Spark Structured Streaming for processing and Apache Iceberg tables for storage.</p>
         <div class="foot"><span class="chip">Kafka</span><span class="chip">Spark Streaming</span><span class="chip">Iceberg</span><a href="https://medium.com/@rohith.narra55/seconds-not-hours-real-time-ad-analytics-with-kafka-spark-streaming-and-iceberg-1c4ed6fbdd8f" target="_blank" rel="noopener" style="margin-left:auto">Read the write-up →</a></div>
       </article>
-      <article class="card">
+      <article class="card spot rv" data-cat="streaming">
         <span class="label">Streaming</span>
         <h3>Contract-first Kafka streams</h3>
         <p>Schema Registry contracts and event-time semantics across 10+ consumer groups at sub-minute latency.</p>
         <div class="foot"><span class="chip">Kafka</span><span class="chip">Spark Streaming</span></div>
       </article>
-      <article class="card">
+      <article class="card spot rv" data-cat="ai">
         <span class="label">Platform</span>
         <h3>Shared MCP tool layer</h3>
         <p>MCP servers that give agents one standard way to reach data tools, so new agent workflows start from a shared base.</p>
         <div class="foot"><span class="chip">MCP</span><span class="chip">Python</span></div>
       </article>
-      <article class="card">
+      <article class="card spot rv" data-cat="ml">
         <span class="label">Machine learning</span>
         <h3>Predicting breast cancer survivability</h3>
         <p>Cut the feature set by 83% using statistical tests, then built an ensemble of neural networks, AdaBoost and logistic regression that improved accuracy by 3%.</p>
         <div class="foot"><span class="chip">Python</span><span class="chip">scikit-learn</span></div>
       </article>
-      <article class="card">
+      <article class="card spot rv" data-cat="data">
         <span class="label">Data engineering</span>
         <h3>US energy analysis</h3>
         <p>Pulled data from 1,500+ API calls and 5 sources, processed it with PySpark and Spark SQL, and loaded it into Snowflake for analysis in Tableau.</p>
@@ -432,8 +576,8 @@ footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; g
 
 <section class="block" id="patent">
   <div class="wrap">
-    <div class="head"><p class="label">Patent</p><h2>Invention</h2></div>
-    <div class="patent">
+    <div class="head rv"><p class="label">Patent</p><h2>Invention</h2></div>
+    <div class="patent spot rv">
       <div><p class="label">US patent publication</p><p class="num">US 2023/0410182 A1</p><p class="mono" style="color:var(--muted);margin-top:6px">Dec 21, 2023</p></div>
       <div>
         <h3>Systems and Methods Handling Mobile Technology Communications</h3>
@@ -446,7 +590,7 @@ footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; g
 
 <section class="block" id="writing">
   <div class="wrap">
-    <div class="head"><p class="label">Writing &amp; publications</p><h2>Notes from the pipeline</h2></div>
+    <div class="head rv"><p class="label">Writing &amp; publications</p><h2>Notes from the pipeline</h2></div>
     <div class="writing">
       <a class="post" href="https://medium.com/@rohith.narra55/seconds-not-hours-real-time-ad-analytics-with-kafka-spark-streaming-and-iceberg-1c4ed6fbdd8f" target="_blank" rel="noopener"><span class="mono" style="color:var(--muted)">Medium</span><div><h3>Seconds, Not Hours: Real-Time Ad Analytics with Kafka, Spark Streaming and Iceberg</h3><p>Building an ad analytics pipeline that reports in seconds instead of hours, with Kafka, Spark Structured Streaming and Apache Iceberg.</p></div><span class="mono">Read →</span></a>
       <div class="post"><span class="mono" style="color:var(--muted)">Paper · in progress</span><div><h3>How do we know an AI agent is actually good?</h3><p>A research paper on evaluating agentic LLMs: building composite metrics for agent performance and checking statistically that they measure what they claim to. More once it's published.</p></div><span class="mono"></span></div>
@@ -456,19 +600,19 @@ footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; g
 
 <section class="block" id="interests">
   <div class="wrap">
-    <div class="head"><p class="label">Interests</p><h2>What I'm exploring</h2></div>
+    <div class="head rv"><p class="label">Interests</p><h2>What I'm exploring</h2></div>
     <div class="interests">
-      <div class="interest"><h3>Agentic AI for data operations</h3><p>Agents that validate, triage and repair pipelines, with humans approving the risky steps.</p></div>
-      <div class="interest"><h3>MCP servers</h3><p>Standard tool interfaces so agents can safely use the same data systems engineers do.</p></div>
-      <div class="interest"><h3>Real-time streaming</h3><p>Event-time correctness, schema contracts and exactly-once delivery at scale.</p></div>
-      <div class="interest"><h3>Apache Flink</h3><p>Stateful stream processing with low latency, and where it fits next to Spark Structured Streaming.</p></div>
+      <div class="interest spot rv"><h3>Agentic AI for data operations</h3><p>Agents that validate, triage and repair pipelines, with humans approving the risky steps.</p></div>
+      <div class="interest spot rv"><h3>MCP servers</h3><p>Standard tool interfaces so agents can safely use the same data systems engineers do.</p></div>
+      <div class="interest spot rv"><h3>Real-time streaming</h3><p>Event-time correctness, schema contracts and exactly-once delivery at scale.</p></div>
+      <div class="interest spot rv"><h3>Apache Flink</h3><p>Stateful stream processing with low latency, and where it fits next to Spark Structured Streaming.</p></div>
     </div>
   </div>
 </section>
 
 <section class="block" id="skills">
   <div class="wrap">
-    <div class="head"><p class="label">Toolkit</p><h2>Skills</h2></div>
+    <div class="head rv"><p class="label">Toolkit</p><h2>Skills</h2></div>
     <div class="skills">
       <div class="skillrow"><span class="label">Core</span><div class="chips"><span class="chip">Spark</span><span class="chip">SQL</span><span class="chip">Python</span><span class="chip">Scala</span><span class="chip">Kafka</span><span class="chip">Airflow</span><span class="chip">Hive</span><span class="chip">Hadoop</span><span class="chip">Hudi</span><span class="chip">Presto</span><span class="chip">Snowflake</span><span class="chip">MongoDB</span></div></div>
       <div class="skillrow"><span class="label">Cloud</span><div class="chips"><span class="chip">BigQuery</span><span class="chip">GCS</span><span class="chip">Dataproc</span><span class="chip">S3</span><span class="chip">EC2</span><span class="chip">EMR</span><span class="chip">Kinesis</span><span class="chip">Redshift</span></div></div>
@@ -480,10 +624,10 @@ footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; g
 
 <section class="block" id="recognition">
   <div class="wrap">
-    <div class="head"><p class="label">Recognition</p><h2>Along the way</h2></div>
+    <div class="head rv"><p class="label">Recognition</p><h2>Along the way</h2></div>
     <div class="recog">
-      <div class="card"><span class="label">Hackathons</span><ul><li>Runner-up, West Coast COVID-19 Hackathon</li></ul></div>
-      <div class="card"><span class="label">Community</span><ul><li>Campus Health Ambassador, Northeastern University</li></ul></div>
+      <div class="card spot rv"><span class="label">Hackathons</span><ul><li>Runner-up, West Coast COVID-19 Hackathon</li></ul></div>
+      <div class="card spot rv"><span class="label">Community</span><ul><li>Campus Health Ambassador, Northeastern University</li></ul></div>
     </div>
   </div>
 </section>
@@ -491,6 +635,8 @@ footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; g
 
 <section class="contact" id="contact">
   <div class="wrap">
+    <div class="contact-grid">
+      <div>
     <p class="label">Contact</p>
     <h2 style="margin-top:12px">Let's talk data platforms and agentic AI.</h2>
     <p>Open to conversations about data engineering, GenAI infrastructure, speaking and collaboration.</p>
@@ -500,21 +646,220 @@ footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; g
       <a class="btn" href="https://www.linkedin.com/in/rohithnarra/" target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn" href="https://github.com/rohith777" target="_blank" rel="noopener">GitHub</a>
     </div>
+      </div>
+      <div class="term" role="img" aria-label="Terminal showing Rohith's role, current interests and email">
+        <div class="term-bar"><i></i><i></i><i></i><span>rohith@austin: ~</span></div>
+        <pre id="term" data-lines='[{"cmd": 1, "t": "whoami"}, {"t": "Rohith Narra \u00b7 Senior Data Engineer, Walmart Global Tech", "cls": "hl2"}, {"cmd": 1, "t": "cat now.txt"}, {"t": "agentic AI \u00b7 MCP \u00b7 real-time streaming \u00b7 Flink"}, {"cmd": 1, "t": "echo $EMAIL"}, {"t": "rohith.narra55@gmail.com", "cls": "hl2"}]'><span class="p">$</span> whoami
+<span class="hl2">Rohith Narra · Senior Data Engineer, Walmart Global Tech</span>
+<span class="p">$</span> cat now.txt
+<span class="o">agentic AI · MCP · real-time streaming · Flink</span>
+<span class="p">$</span> echo $EMAIL
+<span class="hl2">rohith.narra55@gmail.com</span>
+<span class="p">$</span> <span class="caret"></span></pre>
+      </div>
+    </div>
   </div>
 </section>
 <footer><div class="wrap"><span>© 2026 Rohith Reddy Narra</span><span class="mono">Austin, TX</span></div></footer>
 
 <script>
-document.getElementById('copy').addEventListener('click', function () {
-  var b = this, t = document.getElementById('email').textContent;
-  var done = function () { b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy email'; }, 1600); };
-  try {
-    navigator.clipboard.writeText(t).then(done, function () {
-      var r = document.createRange(); r.selectNodeContents(document.getElementById('email'));
-      var s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Press ⌘/Ctrl+C';
+(function () {
+  var root = document.documentElement;
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hoverable = matchMedia('(hover: hover)').matches;
+  function $(s, c) { return (c || document).querySelector(s); }
+  function $$(s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); }
+
+  /* theme toggle */
+  try { var saved = localStorage.getItem('rn-theme'); if (saved) root.setAttribute('data-theme', saved); } catch (e) {}
+  function effective() { return root.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'); }
+  var tbtn = $('#theme');
+  if (tbtn) tbtn.addEventListener('click', function () {
+    var next = effective() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('rn-theme', next); } catch (e) {}
+    readAccent();
+  });
+
+  /* scroll progress + scrollspy */
+  var bar = $('#prog');
+  function onScroll() {
+    var h = document.documentElement.scrollHeight - innerHeight;
+    if (bar) bar.style.width = (h > 0 ? (scrollY / h) * 100 : 0) + '%';
+  }
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  var links = $$('nav.top ul a');
+  if ('IntersectionObserver' in window) {
+    var spy = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        links.forEach(function (a) { a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id); });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    links.forEach(function (a) { var s = document.getElementById(a.getAttribute('href').slice(1)); if (s) spy.observe(s); });
+  }
+
+  /* hero: data-flow canvas */
+  var cv = $('#flow'), ctx = cv && cv.getContext('2d'), acc = '#9cc5f2';
+  function readAccent() { acc = getComputedStyle(root).getPropertyValue('--accent').trim() || acc; if (reduced && ctx) draw(0); }
+  var W = 0, H = 0, parts = [], mouse = { x: -9999, y: -9999 }, running = false, raf = 0;
+  function spawn(any) { return { x: any ? Math.random() * W : -20, lane: Math.floor(Math.random() * 8), ph: Math.random() * 6.283, v: .35 + Math.random() * 1.1, big: Math.random() < .1 }; }
+  function size() {
+    if (!cv) return;
+    var r = cv.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2);
+    W = r.width; H = r.height; cv.width = W * d; cv.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+    var n = Math.round(Math.min(150, (W * H) / 8000)); parts = []; for (var i = 0; i < n; i++) parts.push(spawn(true));
+  }
+  function draw(t) {
+    ctx.clearRect(0, 0, W, H); ctx.fillStyle = acc;
+    for (var i = 0; i < parts.length; i++) {
+      var p = parts[i];
+      if (!reduced) p.x += p.v;
+      if (p.x > W + 20) { parts[i] = p = spawn(false); }
+      var y = H * (.1 + p.lane * .11) + Math.sin(p.x * .006 + p.ph + t * .0004) * (14 + p.lane * 3);
+      var dx = p.x - mouse.x, dy = y - mouse.y, d2 = dx * dx + dy * dy;
+      if (d2 < 14000) y += (dy >= 0 ? 1 : -1) * ((14000 - d2) / 14000) * 34;
+      ctx.globalAlpha = p.big ? .95 : .55;
+      ctx.beginPath(); ctx.arc(p.x, y, p.big ? 2.2 : 1.2, 0, 6.283); ctx.fill();
+      ctx.globalAlpha = p.big ? .22 : .1; ctx.fillRect(p.x - p.v * 16, y - .5, p.v * 16, 1);
+    }
+    ctx.globalAlpha = 1;
+  }
+  function loop(t) { draw(t); if (running) raf = requestAnimationFrame(loop); }
+  if (cv && ctx) {
+    readAccent(); size(); draw(0);
+    addEventListener('resize', function () { size(); draw(0); });
+    var hero = $('.hero');
+    hero.addEventListener('pointermove', function (e) { var r = cv.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; });
+    hero.addEventListener('pointerleave', function () { mouse.x = mouse.y = -9999; });
+    if (!reduced && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        var vis = es[0].isIntersecting;
+        if (vis && !running) { running = true; raf = requestAnimationFrame(loop); }
+        if (!vis) { running = false; cancelAnimationFrame(raf); }
+      }).observe(hero);
+    }
+  }
+
+  /* rotating phrase */
+  var rot = $('#rot');
+  if (rot && !reduced) {
+    var phrases = JSON.parse(rot.getAttribute('data-phrases')), k = 0;
+    setInterval(function () {
+      rot.classList.add('out');
+      setTimeout(function () { k = (k + 1) % phrases.length; rot.textContent = phrases[k]; rot.classList.remove('out'); }, 350);
+    }, 3400);
+  }
+
+  /* count-up stats */
+  var stats = $$('.stat b[data-count]');
+  function countUp(el) {
+    var end = +el.getAttribute('data-count'), suf = el.getAttribute('data-suffix') || '', t0 = null;
+    function step(t) { if (!t0) t0 = t; var f = Math.min((t - t0) / 1200, 1), e = 1 - Math.pow(1 - f, 3); el.textContent = Math.round(end * e) + suf; if (f < 1) requestAnimationFrame(step); }
+    requestAnimationFrame(step);
+  }
+  if (!reduced && 'IntersectionObserver' in window) {
+    var so = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { countUp(e.target); so.unobserve(e.target); } }); }, { threshold: .6 });
+    stats.forEach(function (s) { so.observe(s); });
+  }
+
+  /* journey: every chapter visible; the pipeline follows your scroll */
+  var tabs = $$('.pipeline .node'), panels = $$('#journey .role-card'), pl = $('.pipeline'), cur = 0;
+  function place() {
+    var b = tabs[cur]; if (!b || !pl) return;
+    var r = b.getBoundingClientRect(), pr = pl.getBoundingClientRect();
+    pl.style.setProperty('--px', (r.left - pr.left) + 'px');
+    pl.style.setProperty('--py', (r.top - pr.top) + 'px');
+  }
+  function mark(i) {
+    cur = i;
+    tabs.forEach(function (b, k) { b.classList.toggle('active', k === i); if (k === i) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current'); });
+    place();
+  }
+  tabs.forEach(function (b, k) {
+    b.addEventListener('click', function () { mark(k); panels[k].scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' }); });
+  });
+  if (panels.length && 'IntersectionObserver' in window) {
+    var jo = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) mark(panels.indexOf(e.target)); });
+    }, { rootMargin: '-35% 0px -60% 0px' });
+    panels.forEach(function (p) { jo.observe(p); });
+  }
+  addEventListener('resize', place);
+  mark(0); setTimeout(place, 400);
+
+  /* projects: filters, tilt, spotlight */
+  var cards = $$('#projects .card'), filters = $$('.filter');
+  filters.forEach(function (f) {
+    f.addEventListener('click', function () {
+      var c = f.getAttribute('data-f');
+      filters.forEach(function (x) { x.setAttribute('aria-pressed', x === f ? 'true' : 'false'); });
+      cards.forEach(function (card) {
+        var on = c === 'all' || (' ' + card.getAttribute('data-cat') + ' ').indexOf(' ' + c + ' ') > -1;
+        card.hidden = !on;
+        if (on && !reduced) { card.classList.remove('pop'); void card.offsetWidth; card.classList.add('pop'); }
+      });
     });
-  } catch (e) {}
-});
+  });
+  $$('.spot').forEach(function (el) {
+    el.addEventListener('pointermove', function (e) {
+      var r = el.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+      el.style.setProperty('--mx', x + 'px'); el.style.setProperty('--my', y + 'px');
+      if (hoverable && !reduced && el.classList.contains('card') && el.closest('.grid')) {
+        var rx = ((y / r.height) - .5) * -6, ry = ((x / r.width) - .5) * 6;
+        el.style.transform = 'perspective(900px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) translateY(-4px)';
+      }
+    });
+    el.addEventListener('pointerleave', function () { el.style.transform = ''; });
+  });
+
+  /* skills: hover a skill to light it up everywhere on the page */
+  var allChips = $$('.chip');
+  $$('#skills .chip').forEach(function (c) {
+    var key = c.textContent.trim().toLowerCase();
+    c.addEventListener('pointerenter', function () { allChips.forEach(function (x) { if (x.textContent.trim().toLowerCase() === key) x.classList.add('match'); }); });
+    c.addEventListener('pointerleave', function () { allChips.forEach(function (x) { x.classList.remove('match'); }); });
+  });
+
+  /* reveal on scroll */
+  if (!reduced && 'IntersectionObserver' in window) {
+    var ro = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); } }); }, { threshold: .15 });
+    $$('.rv').forEach(function (el) { if (el.getBoundingClientRect().top > innerHeight) ro.observe(el); });
+  }
+
+  /* contact terminal typing */
+  var term = $('#term');
+  if (term && !reduced && 'IntersectionObserver' in window) {
+    var lines = JSON.parse(term.getAttribute('data-lines'));
+    var to = new IntersectionObserver(function (es) {
+      if (!es[0].isIntersecting) return; to.disconnect();
+      term.innerHTML = ''; var li = 0;
+      function nextLine() {
+        if (li >= lines.length) { term.insertAdjacentHTML('beforeend', '<span class="p">$</span> <span class="caret"></span>'); return; }
+        var L = lines[li++], span = document.createElement('span');
+        if (L.cmd) { term.insertAdjacentHTML('beforeend', '<span class="p">$</span> '); }
+        span.className = L.cmd ? '' : (L.cls || 'o'); term.appendChild(span);
+        var s = L.t, j = 0;
+        (function type() {
+          span.textContent = s.slice(0, ++j);
+          if (j < s.length) setTimeout(type, L.cmd ? 38 : 8);
+          else { term.appendChild(document.createTextNode('\n')); setTimeout(nextLine, L.cmd ? 260 : 120); }
+        })();
+      }
+      nextLine();
+    }, { threshold: .5 });
+    to.observe(term);
+  }
+
+  /* copy email */
+  var copy = $('#copy');
+  if (copy) copy.addEventListener('click', function () {
+    var b = copy, t = $('#email').textContent;
+    var done = function () { b.textContent = 'Copied ✓'; setTimeout(function () { b.textContent = 'Copy email'; }, 1600); };
+    var fallback = function () { var r = document.createRange(); r.selectNodeContents($('#email')); var s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Press ⌘/Ctrl+C'; };
+    try { navigator.clipboard.writeText(t).then(done, fallback); } catch (e) { fallback(); }
+  });
+})();
 </script>
 
 </body>
